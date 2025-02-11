@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\http\Request;    
-
-Route::get('/', function () {
-    return view('welcome');
-});
+use App\Http\Controllers\ThoughtController;
+use app\Models\Thought;
+Route::get('/cloud', [ThoughtController::class,'index']);
+Route::post('/cloud', [ThoughtController::class,'store']);
