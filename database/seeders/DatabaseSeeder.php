@@ -12,8 +12,8 @@ class DatabaseSeeder extends Seeder
     //create 9 users and 9 thoughts
     public function run(): void
     {
-             User::factory(9)->create();
-             thought::factory(9)->create();
+            //  User::factory(9)->create();
+            //  thought::factory(9)->create();
        ;
     }
 }
