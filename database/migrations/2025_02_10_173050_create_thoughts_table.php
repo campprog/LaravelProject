@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('thoughts', function (Blueprint $table) {
             $table->id();
+            $table->integer('position')->default(1);
             $table->longText('thought');
             $table->timestamps();
         });
-    }
+    } 
 
     /**
      * Reverse the migrations.
