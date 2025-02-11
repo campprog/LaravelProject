@@ -10,7 +10,28 @@
     
     @foreach($thoughts as $thought)
     <h2>{{$thought->thought}}</h2>
+
+    <form method="POST" action="/cloud/{{$thought->id}}">
+    @csrf
+    @method('PATCH')
+    <button type="submit" name="direction" value="up">↑</button>
+    </form>
+
+
+    <form method="POST" action="/cloud/{{$thought->id}}">
+    @csrf
+    @method('PATCH')
+    <button type="submit" name="direction" value="down">↓</button>
+    </form>
+        
+    <form method="POST" action="/cloud/{{$thought->id}}">
+    @csrf
+    @method('DELETE')
+    <button>X</button>
+    </form>
+
     @endforeach
+
     <div>
         {{$thoughts->links()}}
     </div>
