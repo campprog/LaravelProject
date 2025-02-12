@@ -4,26 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Thought;
-use App\Models\thought as ModelsThought;
-use PhpParser\Node\Expr\FuncCall;
+use App\Models\User;
+
+
 
 class ThoughtController extends Controller
 {
     //Show every thought
     public function index()
     {
-    return view('cloud',['thoughts'=>Thought::orderby('position','desc')->simplePaginate(6)]);
+    return view('cloud',['thoughts' => Thought::with('user')->orderBy('position', 'desc')->simplePaginate(6)]);
     }
 
     //Store a new thought
     public function store(request $request)
     {
-        $formsFields = $request->validate([
-            'thought'=>'required'
+        $formFields = $request->validate([
+            'thought'=>'required',
+            
         ]);
-
-        $thought=Thought::create($formsFields);
+        $formFields['user_id'] = Auth::id();
+        $thought=Thought::create($formFields);
         $thought->position = $thought->id;
         $thought->save(); 
         return redirect('/cloud');
@@ -62,8 +65,6 @@ class ThoughtController extends Controller
 
         return redirect('/cloud');
     }
-
-
 
     //Destroy thought
     public function destroy(Request $request)

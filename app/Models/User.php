@@ -45,4 +45,11 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    //Relationship with thoughts
+    //One user has many thoughts
+    public function thoughts()
+    {
+        return $this->hasMany(Thought::class, 'user_id');
+    }
 }
