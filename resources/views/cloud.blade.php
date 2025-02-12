@@ -1,4 +1,15 @@
-<h1>Ola "User"</h1> 
+<h1>Welcome to cloud</h1>
+@auth
+<span>{{auth()->user()->name}}</span> 
+<form method="POST" action="/logout">
+    @csrf
+    <button type="submit">Logout</button>
+</form>
+@else
+<a href="/cloud/register"><button>Register</button></a>
+<a href="/cloud/login"><button>Login</button></a>
+@endauth
+
 <form action="/cloud"  method="POST">
     @csrf
     <div>
