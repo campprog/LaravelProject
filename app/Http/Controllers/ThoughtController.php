@@ -45,36 +45,35 @@ class ThoughtController extends Controller
             ->orderBy('position', 'asc')
             ->first();
 
-if ($thoughtAbove) {
+        if ($thoughtAbove) {
+            $tempPosition = $thoughtClicked->position;
+            $thoughtClicked->position = $thoughtAbove->position;
+            $thoughtAbove->position = $tempPosition;
 
-$tempPosition = $thoughtClicked->position;
-$thoughtClicked->position = $thoughtAbove->position;
-$thoughtAbove->position = $tempPosition;
-
-$thoughtClicked->save();
-$thoughtAbove->save();
-}
-} 
-else if ($request->input('direction') === 'down') {
-
-$thoughtBelow = Thought::where('position', '<', $thoughtClicked->position)
+            $thoughtClicked->save();
+            $thoughtAbove->save();
+            }
+            } 
+        else if ($request->input('direction') === 'down') {
+            $thoughtBelow = Thought::where('position', '<', $thoughtClicked->position)
             ->orderBy('position', 'desc')
             ->first();
 
-if ($thoughtBelow) {
+        if ($thoughtBelow) {
+            $tempPosition = $thoughtClicked->position;
+            $thoughtClicked->position = $thoughtBelow->position;
+            $thoughtBelow->position = $tempPosition;
+            
 
-$tempPosition = $thoughtClicked->position;
-$thoughtClicked->position = $thoughtBelow->position;
-$thoughtBelow->position = $tempPosition;
+            $thoughtClicked->save();
+            $thoughtBelow->save();
+             }
+        }
 
-// Salvar alterações
-$thoughtClicked->save();
-$thoughtBelow->save();
-}
-}
+   return redirect('/cloud');
+   }
 
-return redirect('/cloud');
-}
+   
     //Destroy thought
     public function destroy(Request $request)
     {

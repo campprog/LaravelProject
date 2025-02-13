@@ -14,7 +14,11 @@
     @auth
     <div class="text-end">
         <span class="fw-bold">Hi,{{ auth()->user()->name }}</span>
-        <form method="POST" action="/logout" class="d-inline">
+        <form method="GET" action="/cloud/changePassword" class="d-inline">
+            @csrf
+            <button type="submit" class="btn btn-primary btn-sm">Change Password</button>
+        </form>
+        <form method="POST" action="/cloud/logout" class="d-inline">
             @csrf
             <button type="submit" class="btn btn-danger btn-sm">Logout</button>
         </form>

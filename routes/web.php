@@ -11,22 +11,28 @@ Route::get('/cloud', [ThoughtController::class,'index']);
 Route::post('/cloud', [ThoughtController::class,'store'])->middleware('auth');
 
 //Edit position of thought
-route::patch('/cloud/{id}',[ThoughtController::class,'Update'])->middleware('auth');
+Route::patch('/cloud/{id}',[ThoughtController::class,'Update'])->middleware('auth');
 
 //Delete thought
-route::delete('/cloud/{id}',[ThoughtController::class,'destroy'])->middleware('auth');
+Route::delete('/cloud/{id}',[ThoughtController::class,'destroy'])->middleware('auth');
 
 //Show register user
-route::get('/cloud/register', [UserController::class,'create'])->middleware('guest');
+Route::get('/cloud/register', [UserController::class,'create'])->middleware('guest');
 
 //Create new user
-route::post('/cloud/user',[UserController::class,'store']);
+Route::post('/cloud/user',[UserController::class,'store']);
+
+//Show reset password
+Route::get('/cloud/changePassword', [UserController::class, 'showChangePasswordForm'])->middleware('auth');
+
+//Reset Password
+Route::post('/cloud/resetPassword', [UserController::class, 'changePassword'])->middleware('auth');
 
 //Logout user
-route::post('/logout', [UserController::class,'logout'])->middleware('auth');
+Route::post('/cloud/logout', [UserController::class,'logout'])->middleware('auth');
 
 //Show login user
-route::get('/cloud/login', [UserController::class,'login'])->name('login')->middleware('guest');
+Route::get('/cloud/login', [UserController::class,'login'])->name('login')->middleware('guest');
 
 //Login user
-route::post('/cloud/authenticate',[UserController::class,'authenticate']);
+Route::post('/cloud/authenticate',[UserController::class,'authenticate']);
