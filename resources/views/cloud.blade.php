@@ -13,7 +13,7 @@
 
     @auth
     <div class="text-end">
-        <span class="fw-bold">{{ auth()->user()->name }}</span>
+        <span class="fw-bold">Hi,{{ auth()->user()->name }}</span>
         <form method="POST" action="/logout" class="d-inline">
             @csrf
             <button type="submit" class="btn btn-danger btn-sm">Logout</button>
